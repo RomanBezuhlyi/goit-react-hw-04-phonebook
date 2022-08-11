@@ -11,6 +11,7 @@ export const AddContactForm = ({ onSubmit, checkContact }) => {
 
   const handleChange = event => {
     const { name, value } = event.target;
+
     switch (name) {
       case 'name':
         setName(value);
@@ -21,21 +22,21 @@ export const AddContactForm = ({ onSubmit, checkContact }) => {
         break;
 
       default:
-        return;
+        console.log('No such a field');
     }
+  };
+
+  const reset = () => {
+    setName('');
+    setNumber('');
   };
 
   const handleSubmit = event => {
     event.preventDefault();
     if (checkContact(name)) {
       onSubmit({ id: nanoid(), name, number });
+      reset();
     }
-    reset();
-  };
-
-  const reset = () => {
-    setName('');
-    setNumber('');
   };
 
   return (
